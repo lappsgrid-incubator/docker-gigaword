@@ -1,6 +1,7 @@
 DOCKER=/usr/local/bin/docker
 
 gigaword:
+	if [ ! -d GigawordDataSource.war ] ; then wget http://www.anc.org/downloads/docker/GigawordDataSource.war ; fi
 	$(DOCKER) build -t lappsgrid/gigaword .
 	
 #getwar:
