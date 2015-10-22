@@ -1,0 +1,18 @@
+#!/usr/bin/env lsd
+
+String gate = "tokenizer splitter tagger ner coref npchunker vpchunker ortho gazetteer"
+String stanford = "tokenizer splitter tagger ner"
+String opennlp = "tokenizer splitter tagger ner"
+
+String username = "operator"
+String password = "operator"
+String vassar = "http://192.168.99.100:8080/service_manager/invoker/vassar"
+
+gate.tokenize().each {
+	String server = "${vassar}:gate.${it}_2.0.0"
+	println "Getting metadata from $server"
+	WebService service = new ServiceClient(server, username, password)
+	String json = service.getMetadata()
+	println groovy.json.JsonOutput.prettyPrint(json)
+	//println new URL(server).text
+}
