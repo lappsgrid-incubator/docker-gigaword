@@ -1,5 +1,6 @@
-DOCKER=/usr/local/bin/docker
+DOCKER=docker
 IMAGE=lappsgrid/gigaword
+TAG=discovery
 
 gigaword:
 	if [ ! -e GigawordDataSource.war ] ; then wget http://www.anc.org/downloads/docker/GigawordDataSource.war ; fi
@@ -11,8 +12,11 @@ gigaword:
 push:
 	$(DOCKER) push $(IMAGE)
 
+push-tag:
+	$(DOCKER) push $(IMAGE):$(TAG)
+	
 tag:
-	if [ -n "$(TAG)" ] ; then $(DOCKER) tag $(IMAGE):vassar $(IMAGE):$(TAG) ; fi
+	if [ -n "$(TAG)" ] ; then $(DOCKER) tag $(IMAGE) $(IMAGE):$(TAG) ; fi
 	
 
 help:
